@@ -1,9 +1,21 @@
 package utils;
 
 public class ResMsg<T> {
-    boolean success;
-    String msg;
-    T data;
+    private final boolean success;
+    private final String msg;
+    private final  T data;
+
+    public boolean isSuccess() {
+        return success;
+    }
+
+    public String getMsg() {
+        return msg;
+    }
+
+    public T getData() {
+        return data;
+    }
 
     public ResMsg(boolean success, String msg, T data) {
         this.success = success;
