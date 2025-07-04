@@ -1,13 +1,8 @@
 package controllers;
 import com.google.gson.*;
-import models.TaskModel;
 import services.TaskService;
 import utils.LocalDateTimeAdapter;
-import utils.ResMsg;
-
 import java.time.LocalDateTime;
-import java.util.Collection;
-import java.util.Set;
 
 public class TaskController {
 
@@ -34,8 +29,12 @@ public class TaskController {
         return GSON.toJson(service.getListByStatus(whichStatus));
     }
 
-    public String update (String id, String description, String status) {
-        return GSON.toJson(service.update(id, description, status));
+    public String updateDescription (String id, String description) {
+        return GSON.toJson(service.updateByDescription(id, description));
+    }
+
+    public String updateStatus (String id, String status) {
+        return GSON.toJson(service.updateBySatus(id, status));
     }
 
     public String delete (String id) {

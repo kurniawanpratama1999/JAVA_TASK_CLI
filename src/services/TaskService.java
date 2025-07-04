@@ -38,27 +38,39 @@ public class TaskService {
         return ResMsg.ok("Found List", list);
     }
 
-    public ResMsg<TaskModel> update (String id, String description, String status) {
+    public ResMsg<TaskModel> updateByDescription (String id, String description) {
         if (!LIST_OF_TASK.containsKey(id)) return ResMsg.fail("ID not found");
 
         TaskModel task = LIST_OF_TASK.get(id);
 
         if (description != null && !description.equalsIgnoreCase("null")) {
             task.setDescription(description);
+            return ResMsg.ok("ID " + id + " is updated", task);
         }
+
+        return ResMsg.fail("Description is null");
+    }
+
+    public ResMsg<TaskModel> updateBySatus (String id, String status) {
+        if (!LIST_OF_TASK.containsKey(id)) return ResMsg.fail("ID not found");
+
+        TaskModel task = LIST_OF_TASK.get(id);
 
         if (status != null && !status.equalsIgnoreCase("null")) {
             task.setStatus(status);
+            return ResMsg.ok("ID " + id + " is updated", task);
         }
 
-        return ResMsg.ok("ID " + id + " is updated", task);
+        return ResMsg.fail("Status is null");
     }
 
     public ResMsg<Set<TaskModel>> delete (String id) {
         if (!LIST_OF_TASK.containsKey(id)) return ResMsg.fail("ID not found");
 
         TaskModel taskModel = LIST_OF_TASK.get(id);
+
         LIST_OF_TASK.remove(id);
+
         Set<TaskModel> col = new LinkedHashSet<>(LIST_OF_TASK.values());
 
         return ResMsg.ok("ID " + id + " with description: " + taskModel.getDescription() + " is removed", col);
